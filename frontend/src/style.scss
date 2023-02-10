@@ -1,0 +1,350 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    #header {
+        background-color: #071f42;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        #menu {
+            background-color: inherit;
+            display: flex;
+            gap: 1em;
+            a {
+                color: white;
+                font-weight: bolder;
+            }
+        }
+        #userSymbol {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            #user {
+                background-color: #d87600;
+                color: white;
+                width: 2em;
+                height: 2em;
+                font-size: 1.1em;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+            }
+        }
+    }
+    #sort {
+        margin-top: 2em;
+        padding: 0.5em;
+        #btn {
+            display: flex;
+            gap: 0.3em;
+            button {
+                background-color: #531dab;
+            }
+        }
+    }
+    #form {
+        padding: 2em;
+        form {
+            width: 60%;
+            .pair {
+                display: flex;
+                gap: 1em;
+                margin: 1em;
+                align-items: center;
+                .minus {
+                    background-color: #cf1322;
+                }
+            }
+            .plus {
+                background-color: #7cb305;
+            }
+            .genreForm {
+                margin: 1em;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-gap: 1em;
+                div {
+                    display: flex;
+                    gap: 0.3em;
+                    align-items: center;
+                }
+            }
+        }
+    }
+    #content {
+        width: 70%;
+        align-self: center;
+        #movieFilter {
+            display: flex;
+            flex-direction: column;
+            .relative {
+                height: 37vh;
+                position: relative;
+                > * {
+                    width: 100%;
+                    height: 100%;
+                }
+                h1 {
+                    padding: 0.5em;
+                }
+                .cover {
+                    position: absolute;
+                    background-color: #071f42a0;
+                    display: flex;
+                    #welcome {
+                        align-self: center;
+                    }
+                    #select {
+                        display: flex;
+                    }
+                    .title {
+                        color: white;
+                    }
+                    #searchMovies {
+                        padding: 2.5em;
+                        flex: 4;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        gap: 0.3em;
+                        #stats {
+                            border: 3px solid white;
+                            background-color: rgba(0, 0, 255, 0);
+                            border-radius: 50px;
+                            width: 40%;
+                            a {
+                                color: white;
+                            }
+                        }
+                    }
+                    #searchGenres {
+                        padding: 2.5em;
+                        flex: 2;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        .title {
+                            text-align: right;
+                        }                        
+                    }
+                }
+                #photo1 {
+                    background-image: url("./images/image1.jpg");
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                } 
+                #photo2 {
+                    background-image: url("./images/image2.jpeg");
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+            }
+        }
+        #mainList {
+            margin: 2em 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 1.5em;
+            > .listItem {
+                display: flex;
+                flex-direction: column;
+                gap: 1em;
+                position: relative;
+                .movieLink {
+                    color: black;
+                    font-weight: bold;
+                    &:hover {
+                        color: #1677ff;
+                    }
+                }
+                .date {
+                    color: rgba(0,0,0,0.6);
+                }
+                img {
+                    border-radius: 5px;
+                    width: 14em;
+                    height: 15em;
+                }
+                #avg {
+                    color: white;
+                    position: absolute;
+                    top: 12em;
+                    left: 0.5em;
+                    background-color: #051c23;
+                    border: 2px solid #c7e500;
+                    width: 2.5em;
+                    height: 2.5em;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+    }
+    .movieDetailsTop {
+        margin-top: 3em;
+        background-color: #1f2121;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1em;
+        padding: 3em 0;
+        padding-left: 15%;
+        .movieInfo {
+            padding: 1em;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.3em;
+            h3, h4 {
+                color: white;
+                span {
+                    color: #d2d1d2;
+                }
+            }
+            .overview {
+                width: 50%;
+            }
+            .inlineData {
+                display: flex;
+                gap: 1em;
+            }
+            .flex {
+                display: flex;
+                gap: 1em;
+                align-items: center;
+                .avgDetails {
+                    background-color: #051c23;
+                    height: 3em;
+                    width: 3em;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 3px solid #c7e500;
+                    .rate svg {
+                        border: 3px solid red;
+                    }
+                }
+                svg {
+                    stroke: #c7e500;
+                    stroke-width: 50;
+                }
+            }
+        }
+    }
+    #loginForm {
+        height: 100vh;
+        padding: 2em;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        #createLoginBtn {
+            width: 15%;
+        }
+        form {
+            width: 30%;
+        }
+    }
+    
+    .movieDetailsBottom {
+        margin: 3em;
+        display: flex;
+        flex-direction: column;
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            > div {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                grid-gap: 0.2em;
+            }
+        }
+        .trailer {
+            margin-top: 1em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            iframe {
+                width: 50vw;
+            }
+        }
+        .cast {
+            margin-top: 3em;
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            h3 {
+                align-self: center;
+            }
+            ul {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-gap: 0.7em;
+            }
+        }
+    }
+    #adminPanel {
+        padding: 1em;
+    }
+    #footer {
+        background-color: #071f42;
+        color: white;
+        text-align: center;
+    }
+    #statsContent {
+        height: 90vh;
+        padding: 1em;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .commentTitle {
+        margin-top: 5em;
+    }
+    .handleComments {
+        display: flex;
+        gap: 6em;
+        > * {
+            flex: 1;
+        }
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+            .comment {
+                border: 1px solid gray;
+                padding: 0.5em;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 0.2em;
+                .commentData {
+                    flex: 1;
+                    h5 {
+                        border: 3px solid red;
+                    }
+                }
+                .commentInfo {
+                    margin: 0;
+                    padding: 0;
+                    font-size: 0.7em;
+                }
+                .adminCommentButtons {
+                    display: flex;
+                    gap: 0.2em;
+                }
+            }
+        }
+    }
+}
+
