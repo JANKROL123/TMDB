@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../context/UserContext";
 import { connect } from "react-redux";
@@ -13,12 +13,10 @@ import axios from "axios";
 import { Content } from "antd/es/layout/layout";
 import { Image } from "antd";
 import Title from "antd/es/typography/Title";
-import {Rate} from "antd";
+import {Rate, Spin} from "antd";
 function Movie({genres, isPrivate}) {
     const {user} = useContext(UserContext);
     const params = useParams();
-    const navigate = useNavigate();
-    const [commentUpd, setCommentUpd] = useState(false);
     const [details, setDetails] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -121,7 +119,6 @@ function Movie({genres, isPrivate}) {
                                     key={comment.id} 
                                     comment={comment}
                                     deleteComment={deleteComment}
-                                    setCommentUpd={setCommentUpd}
                                     setComments={setComments}
                                     comments={comments}
                                 />) : null}
@@ -131,6 +128,8 @@ function Movie({genres, isPrivate}) {
                     </div>
                 </div> 
             : null}
+            {loading ? <Spin size="large" /> : null}
+            {error ? <div>Error</div> : null}
         </Content>
     )
 }

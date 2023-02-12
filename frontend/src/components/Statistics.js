@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Title from "antd/es/typography/Title";
 import { connect } from "react-redux";
 function Statistics({genres}) {
-    console.log(genres);
     const [roles, setRoles] = useState([]);
     const [commented, setCommented] = useState([]);
     const [genreStats, setGenreStats] = useState([]);
