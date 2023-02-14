@@ -1,3 +1,4 @@
+import React from "react";
 import Sorter from "./Sorter";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
@@ -8,14 +9,22 @@ import MovieFilter from "./MovieFilter";
 import ListElem from "./ListElem";
 import handleFilters from "../functions/handleFilters";
 import { Content } from "antd/es/layout/layout";
-function List({genres, movies, sortMovies, selectedGenres, clearGenres, setSelectedGenres}) {
-  const [query, setQuery] = useState("");  
+import PropTypes from "prop-types";
+function List({
+  genres,
+  movies,
+  sortMovies,
+  selectedGenres,
+  clearGenres,
+  setSelectedGenres
+}) {
+  const [query, setQuery] = useState("");
   const [moviesSortedBy, setMoviesSortedBy] = useState(true);
   useEffect(() => {
     clearGenres();
   }, []);
   function sortMainListByProperty(property) {
-    sortMovies(!moviesSortedBy, property)
+    sortMovies(!moviesSortedBy, property);
     setMoviesSortedBy(!moviesSortedBy);
   }
   function handleClick(arr) {
@@ -23,29 +32,41 @@ function List({genres, movies, sortMovies, selectedGenres, clearGenres, setSelec
   }
   return (
     <Content id="content">
-      {movies ? <MovieFilter
-        genres={genres} 
-        handleClick={handleClick} 
-        setQuery={setQuery} 
-      /> : null}
+      {movies ? (
+        <MovieFilter
+          genres={genres}
+          handleClick={handleClick}
+          setQuery={setQuery}
+        />
+      ) : null}
       <Sorter sortMainListByProperty={sortMainListByProperty} />
       <div id="mainList">
-        {movies ? handleFilters(movies, selectedGenres, query).map((movie) => (
-          <ListElem key={movie.id} movie={movie} />
-        )) : null}
+        {movies
+          ? handleFilters(movies, selectedGenres, query).map((movie) => (
+              <ListElem key={movie.id} movie={movie} />
+            ))
+          : null}
       </div>
       {!movies ? <div>Loading</div> : null}
     </Content>
   );
 }
-const mapStateToProps = state => ({
+List.propTypes = {
+  genres: PropTypes.array,
+  movies: PropTypes.array,
+  sortMovies: PropTypes.func,
+  selectedGenres: PropTypes.array,
+  clearGenres: PropTypes.func,
+  setSelectedGenres: PropTypes.func
+};
+const mapStateToProps = (state) => ({
   movies: state.movies,
   genres: state.genres,
-  selectedGenres: state.selectedGenres,
+  selectedGenres: state.selectedGenres
 });
 const mapDispatchToProps = {
   sortMovies,
   clearGenres,
   setSelectedGenres
-}
-export default connect(mapStateToProps,mapDispatchToProps)(List);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(List);

@@ -1,3 +1,4 @@
+import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Layout from "antd/es/layout/layout";
 import List from "./components/List";
@@ -17,18 +18,23 @@ import AdminPanel from "./components/AdminPanel";
 import UserContext from "./context/UserContext";
 import { Header, Footer } from "antd/es/layout/layout";
 import { Affix } from "antd";
-function App({setAllGenres, setMovies}) {
-  const [error, setError] = useState({movies: null, genres: null});
+import PropTypes from "prop-types";
+function App({ setAllGenres, setMovies }) {
+  const [error, setError] = useState({ movies: null, genres: null });
   const [user, setUser] = useState(null);
-  const providerValue = useMemo(() => ({user, setUser}), [user, setUser]);
+  const providerValue = useMemo(() => ({ user, setUser }), [user, setUser]);
   useEffect(() => {
-    fetchMovies().then(res => {
-      setMovies(res);
-    }).catch(err => setError({...error, movies: err.message}));
-    
-    fetchGenres().then(res => {
-      setAllGenres(res.data.genres);
-    }).catch(err => setError({...error, genres: err.message}));
+    fetchMovies()
+      .then((res) => {
+        setMovies(res);
+      })
+      .catch((err) => setError({ ...error, movies: err.message }));
+
+    fetchGenres()
+      .then((res) => {
+        setAllGenres(res.data.genres);
+      })
+      .catch((err) => setError({ ...error, genres: err.message }));
   }, []);
   return (
     <Layout>
@@ -39,8 +45,14 @@ function App({setAllGenres, setMovies}) {
             {user && user.isAdmin ? <Link to="/form">Add movie</Link> : null}
             {!user ? <Link to="/login">Log in</Link> : null}
           </nav>
-          {user && !user.isAdmin ? <UserSymbol user={user.login} setUser={setUser} /> : null}
-          {user && user.isAdmin ? <Link to="/admin"><UserSymbol user={user.login} setUser={setUser} /></Link> : null}
+          {user && !user.isAdmin ? (
+            <UserSymbol user={user.login} setUser={setUser} />
+          ) : null}
+          {user && user.isAdmin ? (
+            <Link to="/admin">
+              <UserSymbol user={user.login} setUser={setUser} />
+            </Link>
+          ) : null}
         </Header>
       </Affix>
       <UserContext.Provider value={providerValue}>
@@ -55,17 +67,19 @@ function App({setAllGenres, setMovies}) {
           <Route path="/statistics" element={<Statistics />} />
         </Routes>
       </UserContext.Provider>
-      <Footer id="footer">
-        &copy; Frontend Development TMDB Project
-      </Footer>
+      <Footer id="footer">&copy; Frontend Development TMDB Project</Footer>
     </Layout>
-  )
+  );
 }
-const mapStateToProps = state => ({
+App.propTypes = {
+  setMovies: PropTypes.func,
+  setAllGenres: PropTypes.func
+};
+const mapStateToProps = (state) => ({
   movies: state.movies
 });
 const mapDispatchToProps = {
   setMovies,
-  setAllGenres,
-}
+  setAllGenres
+};
 export default connect(mapStateToProps, mapDispatchToProps)(App);

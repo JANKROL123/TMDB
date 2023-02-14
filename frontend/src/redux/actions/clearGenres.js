@@ -1,4 +1,4 @@
 const clearGenres = () => ({
-    type: "CLEAR_GENRES"
+  type: "CLEAR_GENRES"
 });
 export default clearGenres;

@@ -1,5 +1,5 @@
-const setAllGenres = payload => ({
-    type: "SET_ALL_GENRES",
-    payload
+const setAllGenres = (payload) => ({
+  type: "SET_ALL_GENRES",
+  payload
 });
 export default setAllGenres;
